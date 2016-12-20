@@ -24,7 +24,7 @@ docker-compose up
 And then start the manager as follows:
 
 ```
-stack exec use-cloudhaskell-exe manager localhost 8005 500
+stack exec use-cloudhaskell-exe manager localhost 8005 filepath
 ```
 
 You will see console output of this form from from the manager node:
@@ -38,13 +38,11 @@ Starting Node as Manager
 and console output of this form from the worker nodes:
 
 ```
-[Node pid://localhost:8000:0:11] given work: 1
-[Node pid://localhost:8000:0:11] finished work.
-[Node pid://localhost:8000:0:11] given work: 2
-[Node pid://localhost:8000:0:11] finished work.
-[Node pid://localhost:8000:0:11] given work: 3
-[Node pid://localhost:8000:0:11] finished work.
 ```
+[Node pid://localhost:8000:0:12] given work: "/Users/xyz/Documents/TestHaskellProject/use-cloudhaskell/src/Lib.hs"
+[Node pid://localhost:8000:0:12] finished work.
+Terminating node: pid://localhost:8000:0:12
+
 To understand the ouput, consult the code.
 
 __Docker-Compose__
@@ -63,7 +61,7 @@ docker-compose up
 One may now launch a manager node to passwork for these nodes:
 
 ``` 
-stack exec use-cloudhaskell-exe manager localhost 8085 100
+stack exec use-cloudhaskell-exe manager localhost 8085 filepath
 ```
 
 where the final parameter is the size of the number range (see the code to see the specifics on what the project is calculating). Note that when you execute the system in this way you will not see console output from the worker nodes as the worker function has not been written to gather output to the console.

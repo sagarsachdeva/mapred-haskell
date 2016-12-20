@@ -1,8 +1,7 @@
 module FindComplexity where
+import Data.List
 
-calculateComplexity :: String -> Integer
-calculateComplexity fileName = liftIO $ do
-   content <- readFile $ fileName
-   let lines = lines  content
-   lineCount <- length $ lines
-   return lineCount
+calculateComplexity :: String -> IO Integer
+calculateComplexity fileName = do
+   content <- readFile fileName
+   return $ toInteger $ length $ lines content 
