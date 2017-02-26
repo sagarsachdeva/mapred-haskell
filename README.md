@@ -62,7 +62,7 @@ docker-compose up
 One may now launch a manager node to passwork for these nodes:
 
 ``` 
-stack exec use-cloudhaskell-exe manager localhost 8085 filepath
+stack exec mapred-haskell-exe manager localhost 8085 filepath
 ```
 
 where the final parameter is the size of the number range (see the code to see the specifics on what the project is calculating). Note that when you execute the system in this way you will not see console output from the worker nodes as the worker function has not been written to gather output to the console.
