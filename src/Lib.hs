@@ -31,8 +31,8 @@ import           System.Exit
 import           Data.Foldable
 
 -- this is the work we get workers to do. It could be anything we want. To keep things simple, we'll calculate the
--- number of prime factors for the integer passed.
---doWork :: Integer -> Integer
+-- number of line of code for the file path passed.
+--doWork :: String -> Integer
 --doWork = numPrimeFactors
 doWork :: String -> IO Integer
 doWork filen = calculateComplexity filen
@@ -45,7 +45,7 @@ fetchFiles f = do
 
 -- | worker function.
 -- This is the function that is called to launch a worker. It loops forever, asking for work, reading its message queue
--- and sending the result of runnning numPrimeFactors on the message content (an integer).
+-- and sending the result of runnning calculateComplexity.
 worker :: ( ProcessId  -- The processid of the manager (where we send the results of our work)
          , ProcessId) -- the process id of the work queue (where we get our work from)
        -> Process ()
@@ -59,7 +59,7 @@ worker (manager, workQueue) = do
 
       send workQueue us -- Ask the queue for work. Note that we send out process id so that a message can be sent to us
 
-      -- Wait for work to arrive. We will either be sent a message with an integer value to use as input for processing,
+      -- Wait for work to arrive. We will either be sent a message with an string value to use as input for processing,
       -- or else we will be sent (). If there is work, do it, otherwise terminate
       receiveWait
         [ match $ \n  -> do
@@ -144,12 +144,3 @@ someFunc = do
     _ -> putStrLn "Bad parameters"
 
 
-  -- create a cloudhaskell node, which must be initialised with a network transport
-  -- Right transport <- createTransport "127.0.0.1" "10501" defaultTCPParameters
-  -- node <- newLocalNode transport initRemoteTable
-
-  -- runProcess node $ do
-  --   us <- getSelfNode
-  --   _ <- spawnLocal $ sampleTask (1 :: Int, "using spawnLocal")
-  --   pid <- spawn us $ $(mkClosure 'sampleTask) (1 :: Int, "using spawn")
-  --   liftIO $ threadDelay 2000000
