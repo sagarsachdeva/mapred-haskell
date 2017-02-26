@@ -38,10 +38,11 @@ Starting Node as Manager
 and console output of this form from the worker nodes:
 
 ```
-```
 [Node pid://localhost:8000:0:12] given work: "/Users/xyz/Documents/TestHaskellProject/use-cloudhaskell/src/Lib.hs"
 [Node pid://localhost:8000:0:12] finished work.
 Terminating node: pid://localhost:8000:0:12
+```
+
 
 To understand the ouput, consult the code.
 
